@@ -1,41 +1,47 @@
-## ARD Livestreams for Roku Express
+# Multi Live Channel
+Proof of concept streaming channel - for a single live video stream or multiple live stations with navigation. Roku Ads are integrated in the channel. For more info about the Roku Ad Framework, please contact advertising@roku.com.
 
-Since the official ARD app keeps causing problems with the live streams, I created this.
+This channel is publishing ready and can be used as a template for a Roku channel.
 
-### Enable Developer Mode on Roku Express
+![Sample Multi Station Channel Screen Shot](/images/multi-live-channel-screenshot.jpg)
 
-To activate developer mode on your Roku device, follow these steps:
+## Use Case
 
-Use your Roku remote or Roku remote app and press home three times, up twice, and then right, left, right, left, right.
+This sample channel is an easy way to publish a live station of multiple live stations. Simply add your stream or video URL, title, and logo.
 
-![dmode](https://image.roku.com/ZHZscHItMTc2/dev-startup1.png)
+In addition, the Roku Ad Framework is already integrated into the Channel.
 
-Write down the URL of your Roku device that is displayed on the screen and then enable the Development Application Installer.
+**Video Formats:** For the full list of supported Video formats on Roku devices, refer to our docs at https://sdkdocs.roku.com/display/sdkdoc/Video+Encoding+Guidelines
 
-Read and accept the Developer Tools License Agreement, which enables you to build channels with the Roku SDK and other developer tools.
+## How to run this channel
 
-Enter a password for your Roku device (note that passwords are case sensitive). Once you submit the password, your Roku device reboots. When the device finishes rebooting, it is activated in developer mode and ready for sideloading channels.
+* Have you stream URL ready
+* Download the Multi-Live Channel from https://github.com/rokudev/Multi-Live-Channel
+* Locate the `Config.brs` file in the components folder and follow the instructions in the file to enter your info for your stream
+* Select all the files and folders and .zip up the package (note: do not zip the containing folder)
+* Load the application onto your Roku device [read the developer setup guide] (https://blog.roku.com/developer/2016/02/04/developer-setup-guide/)
 
-#### Sideloading channels
+## Features
 
-Sideloading is how you install channels on your Roku device outside of adding them from the Roku Channel Store. To sideload a channel on a Roku device that is in developer mode, follow these steps:
+* Pre-made template for streaming live television content
+* Includes easy functionality to just plug, play, and publish
+* Custom lower third navgiation for supporting multiple channels
+* Incorporates the Roku Ad Framework as an example
 
-In your web browser, enter the URL of your Roku device.
+## Directory Structure
+* **Components:** SceneGraph Components
+  * `Config.brs` This is a file where the user can enter their stream info
+  * `HomeScene.brs` This is the back-end for the UI. It tracks and monitors video playback to play ads and handles channel change events.
+  * `HomeScene.xml` Creates all SceneGraph nodes displayed in the UI
+  * `RowListItems.xml` Formats RowList to have captions, poster-size, etc.
+  * **tasks**
+    * `RowListContentTask.xml` Goes through stream contents and stores all data in content nodes for RowList
+* **Source:** Contains Main method
+  * `Main.brs` Creates screen to display UI when channel starts. Contains setup for RAF integration
 
-Log in to your Roku device. In the User Name field, enter "rokudev", and then enter the password you created when you enabled developer mode.
-
-The Development Application Installer in the Roku plug-in opens. You use this tool to sideload channels on your Roku device. See Roku plug-in tools for more information on the other utilities available in the Roku plug-in.
-
- ![dmodeinstaller](https://image.roku.com/ZHZscHItMTc2/dev-app-installer.png)
-
-In the Development Application Installer, click **Upload**, and then select the livestreams_ard.zip file.
-
-Click **Install**
-
-
-### after changes
-
-- delete livestreams_ard.zip
-- select all files and folders in the directory
-- compress to livestreams_ard.zip
-- reupload to Roku Express
+## Channel Flow
+* **Event:** Upon starting the channel, the stream info is parsed and all content is passed to the SceneGraph nodes.
+* **Event:** The content is loaded into a RowList and all channel artwork is created.
+* **Event:** The main thread calls for a pre-roll add to play. Afterwards, the user's content will play.
+* **User:** If the channel contains more than one stream, the user is presented with a RowList that can toggle between channels.
+* **Event:** Upon choosing a new channel, a pre-roll ad is played. If the same channel is streaming for 20 mintues, a mid-roll ad will play.
