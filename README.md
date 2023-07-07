@@ -39,3 +39,7 @@ Click **Install**
 - select all files and folders in the directory
 - compress to livestreams_ard.zip
 - reupload to Roku Express
+
+### Usage
+
+- Use the UP / DOWN buttons to show the channels menu.
