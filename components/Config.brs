@@ -8,7 +8,7 @@ Function loadConfig() as Object
 	Title: "ARD"
 	streamFormat: "hls"
 	Logo: "pkg:/images/tv_logos/ard.png"
-	Stream: "https://mcdn.daserste.de/daserste/de/master.m3u8"
+	Stream: "https://daserste-live.ard-mcdn.de/daserste/live/hls/de/master.m3u8"
 }
 {
 	Title: "BR"
@@ -74,7 +74,7 @@ Function loadConfig() as Object
 	Title: "ONE"
 	streamFormat: "hls"
 	Logo: "pkg:/images/tv_logos/one.png"
-	Stream: "https://mcdn.one.ard.de/ardone/hls/master.m3u8"
+	Stream: "https://mcdn-one.ard.de/ardone/hls/master.m3u8"
 }
 {
 	Title: "arte"
